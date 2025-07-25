@@ -1,0 +1,32 @@
+PRODUCT RECOMMENDATION MODEL - BEST PERFORMANCE
+============================================================
+Model Type: Random Forest
+Training Date: 2025-07-25 13:29:28
+Dataset: cleaned_merged_dataset.csv
+Data Size: 140 samples, 26 original features
+
+PERFORMANCE METRICS:
+- Accuracy: 0.4419 (44.2%)
+- F1 Score: 0.4515
+- Target Classes: ['Books', 'Clothing', 'Electronics', 'Groceries', 'Sports']
+
+PREPROCESSING APPLIED:
+- SMOTE Data Balancing: True
+- Feature Scaling: RobustScaler
+- Feature Engineering: Advanced (temporal, behavioral, interaction features)
+- Class Balancing: Applied
+
+MODEL PARAMETERS:
+{'bootstrap': True, 'ccp_alpha': 0.0, 'class_weight': 'balanced', 'criterion': 'gini', 'max_depth': 12, 'max_features': 'sqrt', 'max_leaf_nodes': None, 'max_samples': None, 'min_impurity_decrease': 0.0, 'min_samples_leaf': 1, 'min_samples_split': 2, 'min_weight_fraction_leaf': 0.0, 'monotonic_cst': None, 'n_estimators': 300, 'n_jobs': -1, 'oob_score': False, 'random_state': 42, 'verbose': 0, 'warm_start': False}
+
+USAGE INSTRUCTIONS:
+1. Load model: model = joblib.load('product_recommendation_model.pkl')
+2. Load scaler: scaler = joblib.load('scaler.pkl') 
+3. Load encoder: encoder = joblib.load('label_encoder.pkl')
+4. For prediction: 
+   - Scale features: X_scaled = scaler.transform(X_new)
+   - Predict: predictions = model.predict(X_scaled)
+   - Decode: final_predictions = encoder.inverse_transform(predictions)
+
+FEATURE NAMES (in order):
+['purchase_interest_score_mean', 'purchase_interest_score', 'purchase_amount', 'purchase_amount_mean', 'is_weekend', 'purchase_month', 'engagement_score', 'purchase_amount_max', 'purchase_day_of_month', 'customer_rating_mean', 'engagement_interest_interaction', 'purchase_quarter', 'purchase_day_of_week', 'customer_rating_max', 'purchase_amount_min', 'customer_rating_min', 'purchase_amount_std', 'customer_rating', 'engagement_score_std', 'purchase_amount_sum', 'amount_rating_interaction', 'sentiment_numeric', 'purchase_interest_score_std', 'engagement_score_mean', 'engagement_score_max', 'amount_per_engagement']
