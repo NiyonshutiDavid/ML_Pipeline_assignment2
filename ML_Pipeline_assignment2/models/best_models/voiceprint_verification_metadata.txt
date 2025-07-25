@@ -1,0 +1,19 @@
+VOICEPRINT VERIFICATION MODEL
+==========================================
+Model Type: RandomForestClassifier
+Training Date: 2025-07-25 14:36:55
+Dataset: audio_features.csv
+
+PERFORMANCE METRICS:
+- Accuracy: 1.0000 (100.0%)
+- F1 Score (macro): 1.0000
+- Log Loss: 0.3884
+
+MODEL USAGE:
+1. Load model: model = joblib.load('voiceprint_verification_model.pkl')
+2. For prediction on new audio features:
+   - predictions = model.predict(X_new)
+   - probabilities = model.predict_proba(X_new)
+
+FEATURES: All audio feature columns (excluding 'member', 'sample', 'augmentation')
+TARGET: member (speaker identification)
