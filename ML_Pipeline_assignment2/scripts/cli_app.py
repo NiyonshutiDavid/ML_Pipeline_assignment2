@@ -62,19 +62,19 @@ def run():
         loader("Verifying voice")
         try:
             y, sr = load_audio(audio_path)
-            break 
+            audio_feats = extract_audio(y, sr)
+            voice_conf = predict_voice(audio_feats)
         except Exception as e:
             print(f"[!] Failed to load audio: {type(e).__name__} - {str(e) or 'No details provided'}")
             continue
 
-    audio_feats = extract_audio(y, sr)
-    voice_conf = predict_voice(audio_feats)
+        if voice_conf < 50:
+            print(f"ACCESS DENIED: Voice not verified ({voice_conf:.2f}%). Try again.")
+            continue
 
-    if voice_conf < 50:
-        print("ACCESS DENIED: Voice not verified.")
-        return
+        print(f"Voice Verified ({voice_conf:.2f}%)")
+        break
 
-    print(f"Voice Verified ({voice_conf:.2f}%)")
     print("\n===== ACCESS GRANTED =====")
     print(f"Recommended Product: {product}")
 
