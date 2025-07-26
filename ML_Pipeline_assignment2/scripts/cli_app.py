@@ -1,13 +1,12 @@
 import os
 import time
 from PIL import Image
-import matplotlib.pyplot as plt
 import librosa
 from image_processing import process_image
-from audio_processing import extract_features as extract_audio
+from audio_processing import extract_features as extract_audio, load_audio
 from prediction_helpers import predict_face, predict_voice, predict_product
 
-def loader(message="Processing", dots=3, delay=0.5):
+def loader(message="Processing", dots=7, delay=0.5):
     print(message, end="", flush=True)
     for _ in range(dots):
         time.sleep(delay)
@@ -62,8 +61,8 @@ def run():
 
         loader("Verifying voice")
         try:
-            y, sr = librosa.load(audio_path, sr=None)
-            break  # exit loop if successful
+            y, sr = load_audio(audio_path)
+            break 
         except Exception as e:
             print(f"[!] Failed to load audio: {type(e).__name__} - {str(e) or 'No details provided'}")
             continue

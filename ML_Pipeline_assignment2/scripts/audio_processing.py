@@ -4,13 +4,21 @@ import numpy as np
 
 base_path = '../audio'
 
-def load_audio(member, sample):
-    for ext in ['wav', 'mp3']:
-        path = os.path.join(base_path, member, f'{sample}.{ext}')
-        if os.path.exists(path):
-            y, sr = librosa.load(path, sr=None)
-            return y, sr
-    raise FileNotFoundError(f'No audio found for {member} - {sample}')
+def load_audio(file_path):
+    if not os.path.exists(file_path):
+        raise FileNotFoundError(f"Audio file not found: {file_path}")
+
+    valid_exts = ['.wav', '.mp3']
+    ext = os.path.splitext(file_path)[1].lower()
+    if ext not in valid_exts:
+        raise ValueError(f"Unsupported audio format: {ext}. Supported: {valid_exts}")
+
+    try:
+        y, sr = librosa.load(file_path, sr=None)
+    except Exception as e:
+        raise ValueError(f"Failed to load audio file: {file_path}. Error: {e}")
+
+    return y, sr
 
 def extract_features(y, sr):
     mfccs = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13).mean(axis=1)
