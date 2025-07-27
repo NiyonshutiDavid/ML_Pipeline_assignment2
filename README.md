@@ -1,4 +1,3 @@
-# ML_Pipeline_assignment2
 # Multimodal Data Preprocessing Assignment
 
 ## 📅 Assignment: Formative 2 — Multimodal Data Preprocessing
